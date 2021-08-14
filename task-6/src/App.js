@@ -1,35 +1,31 @@
-import React, {useState} from 'react';
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
-
-import CostumersAdd from './pages/CostumersAddPage/costumersadd';
-import Costumers from './pages/Costumers/costumers';
-import CostumersActive from './pages/CostumersActivePage/costumersactive';
-import CostumersPassive from './pages/CostumersPassivePage/costumerspassive';
-import NavBar from './components/Navbar/Navbar';
-import Login from './pages/LoginPage/Login';
-
-function App(){
-  return(
-    <Router>  
-    <NavBar/>
-      <main>
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./pages/LoginPage/Login";
+import Costumers from "./pages/Costumers/costumers";
+import CostumersAdd from "./pages/CostumersAddPage/costumersadd";
+import CostumersActive from "./pages/CostumersActivePage/costumersactive";
+import CostumersPassive from "./pages/CostumersPassivePage/costumerspassive";
+import NavBar from "./components/Navbar/Navbar";
+class Index extends Component {
+  render() {
+    return (
+      <Router>
         <Switch>
-          <Route path="/costumersadd" exact>
-              <CostumersAdd/>
-          </Route>
-          <Route path="/costumers" exact>
-            <Costumers/>
-          </Route>
-          <Route path="/costumersactive" exact>
-            <CostumersActive/>
-          </Route>
-          <Route path="/costumerspassive" exact>
-            <CostumersPassive/>
-          </Route>
-          <Redirect to="/costumers"/>
+          <Route exact path="/" component={Login} />
+          <div>
+            <NavBar />
+            <Route exact path="/costumers" component={Costumers} />
+            <Route exact path="/costumersadd" component={CostumersAdd} />
+            <Route exact path="/costumersactive" component={CostumersActive} />
+            <Route
+              exact
+              path="/costumerspassive"
+              component={CostumersPassive}
+            />
+          </div>
         </Switch>
-      </main>
-    </Router>
-  )
+      </Router>
+    );
+  }
 }
-export default App;
+export default Index;
